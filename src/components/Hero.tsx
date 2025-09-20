@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown, Mail } from "lucide-react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import heroImage from "@/assets/hero-bg.jpg";
+import profileImage from "@/assets/Vinay-Kumar-Saw-pic.png";
 import { personalConfig, getFullName, getGithubUrl, getLinkedinUrl, getMailtoLink, getResumeDownloadUrl } from "@/config/personal";
 
 const Hero = () => {
@@ -15,7 +16,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
+    <section className="relative min-h-screen flex items-start justify-center overflow-hidden py-20 pt-24">
       {/* Background */}
       <div 
         className="absolute inset-0 z-0"
@@ -29,16 +30,20 @@ const Hero = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center animate-fade-in flex flex-col items-center justify-center">
-        <div className="mb-6">
-          <div className="w-32 h-32 mx-auto mb-8 rounded-full gradient-primary p-1 animate-pulse-glow">
-            <div className="w-full h-full rounded-full bg-card flex items-center justify-center">
-              <span className="text-4xl font-bold text-primary">{personalConfig.initials}</span>
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center animate-fade-in flex flex-col items-center">
+        <div className="mb-4">
+          <div className="w-40 h-40 mx-auto mb-4 rounded-full gradient-primary p-1 animate-pulse-glow">
+            <div className="w-full h-full rounded-full bg-card flex items-center justify-center overflow-hidden">
+              <img 
+                src={profileImage} 
+                alt="Vinay Saw"
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
           </div>
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-data-purple bg-clip-text text-transparent">
+        <h1 className="text-5xl md:text-7xl font-bold mb-2 bg-gradient-to-r from-primary via-accent to-data-purple bg-clip-text text-transparent leading-tight pb-4">
           {getFullName()}
         </h1>
         
