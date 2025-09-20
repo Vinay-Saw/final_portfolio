@@ -5,8 +5,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  // Set the base path to your repository name
-  base: "/vinay-saw.github.io-8f1c2becf3e7649fd7b6afcefd67504fb869aabb/", 
+  // Make sure this matches your repository name
+  base: "/vinay-saw.github.io-8f1c2becf3e7649fd7b6afcefd67504fb869aabb/",
   server: {
     host: "::",
     port: 8080,
