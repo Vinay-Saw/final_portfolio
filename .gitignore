@@ -24,5 +24,5 @@ dist-ssr
 *.sw?
 
 # Personal configuration - Keep private
-src/config/personal.ts
-src/config/email.ts
+# src/config/personal.ts
+# src/config/email.ts
