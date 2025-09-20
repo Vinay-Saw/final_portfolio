@@ -3,6 +3,14 @@ import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
+  const handleViewWorkClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background */}
@@ -28,7 +36,7 @@ const Hero = () => {
         </div>
         
         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-data-purple bg-clip-text text-transparent">
-          Alex Chen
+          Vinay Saw
         </h1>
         
         <h2 className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -37,13 +45,13 @@ const Hero = () => {
         
         <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
           Transforming raw data into actionable insights through machine learning, 
-          statistical analysis, and data visualization. Currently pursuing my Master's 
+          statistical analysis, and data visualization. Currently pursuing my Bachelor's 
           in Data Science with a passion for solving real-world problems.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button size="lg" className="gradient-primary hover-glow text-primary-foreground px-8 py-6 text-lg">
-            View My Work
+          <Button asChild size="lg" className="gradient-primary hover-glow text-primary-foreground px-8 py-6 text-lg">
+            <a href="#projects" onClick={handleViewWorkClick}>View My Work</a>
           </Button>
           <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10 px-8 py-6 text-lg">
             Download Resume
@@ -51,13 +59,13 @@ const Hero = () => {
         </div>
         
         <div className="flex gap-6 justify-center">
-          <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover-glow">
+          <a href="https://github.com/vinay-saw/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors hover-glow">
             <Github className="w-6 h-6" />
           </a>
-          <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover-glow">
+          <a href="https://www.linkedin.com/in/vinaysaw/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors hover-glow">
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href="#" className="text-muted-foreground hover:text-primary transition-colors hover-glow">
+          <a href="mailto:vinaysaw2003@gmail.com" className="text-muted-foreground hover:text-primary transition-colors hover-glow">
             <Mail className="w-6 h-6" />
           </a>
         </div>

@@ -4,8 +4,21 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Index = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -31,7 +44,7 @@ const Index = () => {
       <footer className="py-8 px-6 border-t border-border/30">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-muted-foreground">
-            © 2024 Alex Chen. Built with React, TypeScript & Tailwind CSS.
+            © 2026 Vinay Saw. Designed by Lovable AI.
           </p>
         </div>
       </footer>
