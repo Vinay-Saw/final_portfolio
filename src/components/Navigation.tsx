@@ -72,7 +72,7 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-border/50 animate-fade-in">
+          <div className="md:hidden mt-4 py-4 border-t border-border/50 bg-background/95 backdrop-blur-md rounded-lg animate-fade-in">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <a
