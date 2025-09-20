@@ -1,5 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { getFeaturedCertificates } from "@/data/certificates";
 
 const Education = () => {
   const education = [
@@ -33,32 +36,7 @@ const Education = () => {
     }
   ];
 
-  const certifications = [
-    {
-      title: "AWS Certified Machine Learning - Specialty",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      badge: "🏆"
-    },
-    {
-      title: "TensorFlow Developer Certificate",
-      issuer: "Google",
-      date: "2023",
-      badge: "🧠"
-    },
-    {
-      title: "Data Science Professional Certificate",
-      issuer: "IBM",
-      date: "2022",
-      badge: "📊"
-    },
-    {
-      title: "Python for Data Science",
-      issuer: "Coursera",
-      date: "2022",
-      badge: "🐍"
-    }
-  ];
+  const certifications = getFeaturedCertificates();
 
   return (
     <section className="py-20 px-6">
@@ -109,8 +87,8 @@ const Education = () => {
                       {edu.courses.map((course) => (
                         <Badge 
                           key={course} 
-                          variant="secondary" 
-                          className="text-xs bg-muted/50 border border-border/30"
+                          variant="outline" 
+                          className="text-xs border-primary/30 text-muted-foreground"
                         >
                           {course}
                         </Badge>
@@ -128,25 +106,34 @@ const Education = () => {
           <h3 className="text-2xl font-semibold mb-8 text-center">Professional Certifications</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {certifications.map((cert, index) => (
-              <Card 
-                key={cert.title} 
-                className="hover-glow border-border/50 text-center"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <CardContent className="pt-6 pb-6">
-                  <div className="text-3xl mb-4">{cert.badge}</div>
-                  <h4 className="font-semibold text-sm mb-2 line-clamp-2">
-                    {cert.title}
-                  </h4>
-                  <p className="text-xs text-muted-foreground mb-2">
-                    {cert.issuer}
-                  </p>
-                  <Badge variant="outline" className="text-xs">
-                    {cert.date}
-                  </Badge>
-                </CardContent>
-              </Card>
+              <Link key={cert.id} to={`/certificates/${cert.id}`}>
+                <Card 
+                  className="hover-glow border-border/50 text-center group cursor-pointer transition-transform hover:scale-105"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <CardContent className="pt-6 pb-6">
+                    <div className="text-3xl mb-4">{cert.badge}</div>
+                    <h4 className="font-semibold text-sm mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      {cert.title}
+                    </h4>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      {cert.issuer}
+                    </p>
+                    <Badge variant="outline" className="text-xs">
+                      {cert.date}
+                    </Badge>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
+          </div>
+          
+          <div className="text-center mt-8">
+            <Link to="/certificates">
+              <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10">
+                View All Certificates
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
