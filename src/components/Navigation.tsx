@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { getResumeDownloadUrl, personalConfig } from "@/config/personal";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Navigation = () => {
@@ -24,6 +25,19 @@ const Navigation = () => {
     { label: "Education", href: "#education" },
     { label: "Contact", href: "#contact" },
   ];
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    
+    if (location.pathname === "/") {
+      // Scroll to top if already on home page
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // Navigate to home page
+      navigate("/");
+    }
+  };
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -50,12 +64,15 @@ const Navigation = () => {
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <div 
+            className="flex items-center gap-3 cursor-pointer" 
+            onClick={handleLogoClick}
+          >
             <div className="w-10 h-10 gradient-primary rounded-full flex items-center justify-center">
-              <span className="text-lg font-bold text-primary-foreground">AC</span>
+              <span className="text-lg font-bold text-primary-foreground">{personalConfig.initials}</span>
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Alex Chen
+              {personalConfig.fullName}
             </span>
           </div>
 
@@ -76,8 +93,11 @@ const Navigation = () => {
               variant="outline" 
               size="sm"
               className="border-primary text-primary hover:bg-primary/10"
+              asChild
             >
-              Resume
+              <a href={getResumeDownloadUrl()} target="_blank" rel="noopener noreferrer">
+                Resume
+              </a>
             </Button>
           </div>
 
@@ -95,7 +115,7 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 py-4 border-t border-border/50 bg-background/95 backdrop-blur-md rounded-lg animate-fade-in">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 items-end">
               {navItems.map((item) => (
                 <a
                   key={item.label}
@@ -109,9 +129,12 @@ const Navigation = () => {
               <Button
                 variant="outline" 
                 size="sm"
-                className="border-primary text-primary hover:bg-primary/10 self-start mt-2"
+                className="border-primary text-primary hover:bg-primary/10 mt-2"
+                asChild
               >
-                Resume
+                <a href={getResumeDownloadUrl()} target="_blank" rel="noopener noreferrer">
+                  Resume
+                </a>
               </Button>
             </div>
           </div>

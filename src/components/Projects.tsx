@@ -1,7 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { SiGithub } from "react-icons/si";
 import { Link } from "react-router-dom";
 import { getFeaturedProjects } from "@/data/projects";
 
@@ -65,7 +66,7 @@ const Projects = () => {
                       window.open(project.github, '_blank');
                     }}
                   >
-                    <Github className="w-4 h-4 mr-2" />
+                    <SiGithub className="w-4 h-4 mr-2" />
                     Code
                   </Button>
                   <Button 

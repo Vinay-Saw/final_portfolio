@@ -51,7 +51,7 @@ const Skills = () => {
                       className="h-3 bg-muted"
                     />
                     <div 
-                      className="absolute top-0 left-0 h-3 rounded-full gradient-primary transition-all duration-1000 ease-out"
+                      className="absolute top-0 left-0 h-3 gradient-primary transition-all duration-1000 ease-out"
                       style={{ width: `${skill.level}%` }}
                     />
                   </div>

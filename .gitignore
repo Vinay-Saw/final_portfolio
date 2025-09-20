@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Personal configuration - Keep private
+src/config/personal.ts
+src/config/email.ts
