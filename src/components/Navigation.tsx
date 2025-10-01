@@ -115,13 +115,13 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 py-4 border-t border-border/50 bg-background/95 backdrop-blur-md rounded-lg animate-fade-in">
-            <div className="flex flex-col gap-4 items-end">
+            <div className="flex flex-col gap-4 items-center">
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-muted-foreground hover:text-primary transition-colors py-2"
+                  className="text-muted-foreground hover:text-primary transition-colors py-2 text-center w-full"
                 >
                   {item.label}
                 </a>
