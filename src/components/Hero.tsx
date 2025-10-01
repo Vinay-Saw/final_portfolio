@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown, Mail } from "lucide-react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
 import heroImage from "@/assets/hero-bg.jpg";
-import profileImage from "@/assets/Vinay-Kumar-Saw-pic.png";
+import profileImage from "@/assets/Vinay-Kumar-Saw-pic.jpg";
 import { personalConfig, getFullName, getGithubUrl, getLinkedinUrl, getMailtoLink, getResumeDownloadUrl } from "@/config/personal";
 
 const Hero = () => {
