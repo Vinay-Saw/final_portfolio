@@ -37,7 +37,7 @@ const ProjectDetail = () => {
                   <Badge variant="secondary" className="mb-2">
                     {project.category}
                   </Badge>
-                  <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight pb-4">
                     {project.title}
                   </h1>
                 </div>

@@ -43,7 +43,7 @@ const CertificateDetail = () => {
                 <Badge variant="secondary" className="mb-3">
                   {certificate.category}
                 </Badge>
-                <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight pb-4">
                   {certificate.title}
                 </h1>
                 <p className="text-xl text-primary mb-2">{certificate.issuer}</p>
