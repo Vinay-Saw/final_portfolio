@@ -46,7 +46,7 @@ const Projects = () => {
                           {project.category}
                         </Badge>
                       </div>
-                      <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                      <CardTitle className="text-xl group-hover:text-primary transition-colors mb-4">
                         {project.title}
                       </CardTitle>
                       <CardDescription className="text-sm">
