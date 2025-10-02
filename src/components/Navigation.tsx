@@ -21,7 +21,8 @@ const Navigation = () => {
   const navItems = [
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
-    { label: "Projects", href: "#projects" },
+    { label: "Projects", href: "/projects" },
+    { label: "Certifications", href: "#certifications" },
     { label: "Education", href: "#education" },
     { label: "Contact", href: "#contact" },
   ];
@@ -45,6 +46,14 @@ const Navigation = () => {
   ) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
+
+    // Handle route navigation (starts with /)
+    if (href.startsWith("/")) {
+      navigate(href);
+      return;
+    }
+
+    // Handle anchor links (starts with #)
     const targetId = href.substring(1);
 
     if (location.pathname === "/") {

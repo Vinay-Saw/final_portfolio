@@ -102,7 +102,7 @@ const Education = () => {
         </div>
 
         {/* Certifications */}
-        <div>
+        <div id="certifications">
           <h3 className="text-2xl font-semibold mb-8 text-center">Professional Certifications</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {certifications.map((cert, index) => (
