@@ -2,52 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
 @layer base {
   :root {
-    /* Light Theme Default */
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 26% 14%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 23% 18%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 23% 18%;
+    --popover-foreground: 210 40% 98%;
 
-    /* Teal Primary */
-    --primary: 175 70% 41%; /* Teal */
-    --primary-foreground: 210 40% 98%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 220 26% 14%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 26% 14%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 14% 32%;
+    --muted-foreground: 210 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 142 76% 36%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 175 70% 41%;
+    --border: 220 14% 32%;
+    --input: 220 14% 32%;
+    --ring: 199 89% 48%;
+
+    /* Custom Data Science Theme */
+    --data-blue: 199 89% 48%;
+    --data-green: 142 76% 36%;
+    --data-purple: 262 83% 58%;
+    --data-orange: 25 95% 53%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(199 89% 48%), hsl(262 83% 58%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 76% 36%), hsl(199 89% 48%));
+    --gradient-accent: linear-gradient(135deg, hsl(262 83% 58%), hsl(25 95% 53%));
+    
+    /* Shadows */
+    --shadow-data: 0 10px 30px -10px hsl(199 89% 48% / 0.3);
+    --shadow-glow: 0 0 40px hsl(199 89% 48% / 0.2);
 
     --radius: 0.5rem;
 
-    /* Custom Data Science Colors */
-    --data-teal: 175 70% 41%;
-    --data-dark: 222.2 84% 4.9%;
-    --data-gray: 215.4 16.3% 46.9%;
+    --sidebar-background: 0 0% 98%;
 
-    /* Gradients (Mapped to Teal) */
-    --gradient-primary: linear-gradient(135deg, hsl(175 70% 41%), hsl(175 70% 30%));
-    --gradient-secondary: linear-gradient(135deg, hsl(175 70% 30%), hsl(175 70% 41%));
-    --gradient-accent: linear-gradient(135deg, hsl(175 70% 41%), hsl(175 70% 50%));
+    --sidebar-foreground: 240 5.3% 26.1%;
 
-    /* Shadows */
-    --shadow-glow: 0 0 20px hsl(175 70% 41% / 0.2);
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -60,7 +80,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 175 70% 41%;
+    --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -77,7 +97,15 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 175 70% 41%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -85,8 +113,9 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground;
   }
 }
 
@@ -103,6 +132,14 @@
     background: var(--gradient-accent);
   }
   
+  .shadow-data {
+    box-shadow: var(--shadow-data);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
   .hover-glow {
     transition: all 0.3s ease;
   }
@@ -110,26 +147,5 @@
   .hover-glow:hover {
     box-shadow: var(--shadow-glow);
     transform: translateY(-2px);
-  }
-
-  /* Animation utilities */
-  .animate-fade-in {
-    animation: fade-in 0.6s ease-out forwards;
-    opacity: 0;
-  }
-
-  .animate-slide-up {
-    animation: slide-up 0.8s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes slide-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 }
