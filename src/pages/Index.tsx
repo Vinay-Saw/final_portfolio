@@ -1,13 +1,11 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Services from "@/components/Services";
+import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { personalConfig } from "@/config/personal";
 
 const Index = () => {
   const location = useLocation();
@@ -22,12 +20,15 @@ const Index = () => {
   }, [location]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Navigation />
       <main>
-        <Hero />
-        <About />
-        <Services />
+        <section id="about">
+          <Hero />
+        </section>
+        <section id="skills">
+          <Skills />
+        </section>
         <section id="projects">
           <Projects />
         </section>
@@ -40,10 +41,10 @@ const Index = () => {
       </main>
       
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-slate-100 bg-slate-50">
-        <div className="container mx-auto text-center">
-          <p className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} {personalConfig.fullName}. All rights reserved.
+      <footer className="py-8 px-6 border-t border-border/30">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-muted-foreground">
+            © 2026 Vinay Saw. Designed by Lovable AI.
           </p>
         </div>
       </footer>
