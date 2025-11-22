@@ -70,7 +70,26 @@ export const personalConfig = {
     degree: "Bachelor's in Data Science",
     institution: "Indian Institute of Information Technology, Chennai (Madras)",
     year: "Expected 2027" // Update as needed
-  }
+  },
+
+  // Services
+  services: [
+    {
+      title: "Data Analysis",
+      description: "Extracting meaningful insights from complex datasets to drive decision making using statistical methods and modern tools.",
+      icon: "BarChart3",
+    },
+    {
+      title: "Machine Learning",
+      description: "Building and deploying predictive models, neural networks, and algorithms to solve real-world problems and automate processes.",
+      icon: "Brain",
+    },
+    {
+      title: "Data Visualization",
+      description: "Transforming complex data into intuitive, interactive dashboards and visual stories that communicate insights clearly.",
+      icon: "PieChart",
+    },
+  ]
 } as const;
 
 // Helper functions for commonly used formats
