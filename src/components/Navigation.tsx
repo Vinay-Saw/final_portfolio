@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { getResumeDownloadUrl, personalConfig } from "@/config/personal";
+import { personalConfig } from "@/config/personal";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Navigation = () => {
@@ -12,140 +11,108 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
-    { label: "About", href: "#about" },
-    { label: "Skills", href: "#skills" },
-    { label: "Projects", href: "/projects" },
-    { label: "Certifications", href: "/certificates" },
-    { label: "Education", href: "#education" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "/", type: "route" },
+    { label: "About", href: "#about", type: "anchor" },
+    { label: "Resume", href: personalConfig.resume.downloadUrl, type: "external" },
+    { label: "Portfolio", href: "#projects", type: "anchor" },
+    { label: "Contact", href: "#contact", type: "anchor" },
   ];
-
-  const handleLogoClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-    
-    if (location.pathname === "/") {
-      // Scroll to top if already on home page
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      // Navigate to home page
-      navigate("/");
-    }
-  };
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    item: { label: string; href: string; type: string }
   ) => {
+    if (item.type === "external") return; // Let default behavior happen for external links
+
     e.preventDefault();
     setIsMobileMenuOpen(false);
 
-    // Handle route navigation (starts with /)
-    if (href.startsWith("/")) {
-      navigate(href);
-      return;
+    if (item.type === "route" && item.href === "/") {
+       if (location.pathname !== "/") {
+         navigate("/");
+       } else {
+         window.scrollTo({ top: 0, behavior: "smooth" });
+       }
+       return;
     }
 
-    // Handle anchor links (starts with #)
-    const targetId = href.substring(1);
-
-    if (location.pathname === "/") {
-      const element = document.getElementById(targetId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+    if (item.type === "anchor") {
+      const targetId = item.href.substring(1);
+      if (location.pathname === "/") {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        navigate("/", { state: { scrollTo: targetId } });
       }
-    } else {
-      navigate("/", { state: { scrollTo: targetId } });
     }
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? "bg-background/90 backdrop-blur-lg border-b border-border/50" : "bg-transparent"
-    }`}>
-      <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div 
-            className="flex items-center gap-3 cursor-pointer" 
-            onClick={handleLogoClick}
-          >
-            <div className="w-10 h-10 gradient-primary rounded-full flex items-center justify-center">
-              <span className="text-lg font-bold text-primary-foreground">{personalConfig.initials}</span>
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              {personalConfig.fullName}
-            </span>
-          </div>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-4" : "bg-transparent py-6"
+      }`}
+    >
+      <div className="container mx-auto px-6 flex items-center justify-between">
+        {/* Logo */}
+        <a
+          href="/"
+          onClick={(e) => handleNavClick(e, { label: "Home", href: "/", type: "route" })}
+          className="text-2xl font-bold text-slate-800"
+        >
+          {personalConfig.fullName}
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target={item.type === "external" ? "_blank" : undefined}
+              rel={item.type === "external" ? "noopener noreferrer" : undefined}
+              onClick={(e) => handleNavClick(e, item)}
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                isScrolled ? "text-slate-600" : "text-slate-800"
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-slate-800"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Mobile Navigation */}
+        {isMobileMenuOpen && (
+          <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-100 p-4 md:hidden flex flex-col gap-4 shadow-lg animate-fade-in">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="text-muted-foreground hover:text-primary transition-colors relative group"
+                target={item.type === "external" ? "_blank" : undefined}
+                rel={item.type === "external" ? "noopener noreferrer" : undefined}
+                onClick={(e) => handleNavClick(e, item)}
+                className="text-slate-600 hover:text-primary font-medium py-2 text-center"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
-            <Button
-              variant="outline" 
-              size="sm"
-              className="border-primary text-primary hover:bg-primary/10"
-              asChild
-            >
-              <a href={getResumeDownloadUrl()} target="_blank" rel="noopener noreferrer">
-                Resume
-              </a>
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </Button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-border/50 bg-background/95 backdrop-blur-md rounded-lg animate-fade-in">
-            <div className="flex flex-col gap-4 items-center">
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-muted-foreground hover:text-primary transition-colors py-2 text-center w-full"
-                >
-                  {item.label}
-                </a>
-              ))}
-              <Button
-                variant="outline" 
-                size="sm"
-                className="border-primary text-primary hover:bg-primary/10 mt-2"
-                asChild
-              >
-                <a href={getResumeDownloadUrl()} target="_blank" rel="noopener noreferrer">
-                  Resume
-                </a>
-              </Button>
-            </div>
           </div>
         )}
       </div>
