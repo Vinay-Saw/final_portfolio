@@ -2,8 +2,8 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Mail } from "lucide-react";
 import { SiGithub, SiLinkedin } from "react-icons/si";
-import heroImage from "@/assets/hero-bg.jpg";
 import profileImage from "@/assets/Vinay-Kumar-Saw-pic.png";
+import HeroBackground from "@/components/HeroBackground";
 import { personalConfig, getFullName, getGithubUrl, getLinkedinUrl, getMailtoLink, getResumeDownloadUrl } from "@/config/personal";
 
 const Hero = () => {
@@ -18,16 +18,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-start justify-center overflow-hidden py-20 pt-24">
       {/* Background */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-      </div>
+      <HeroBackground />
       
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center animate-fade-in flex flex-col items-center">
