@@ -34,7 +34,7 @@ const Hero = () => {
           </div>
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-bold mb-2 bg-gradient-to-r from-primary via-accent to-data-purple bg-clip-text text-transparent leading-tight pb-4">
+        <h1 className="text-5xl md:text-7xl font-bold mb-2 font-orbitron tracking-widest uppercase bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text leading-tight pb-4">
           {getFullName()}
         </h1>
         
@@ -47,10 +47,10 @@ const Hero = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button asChild size="lg" className="gradient-primary hover-glow text-primary-foreground px-8 py-6 text-lg">
+          <Button asChild size="lg" className="px-8 py-6 text-lg">
             <a href="#projects" onClick={handleViewWorkClick}>View My Work</a>
           </Button>
-          <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10 px-8 py-6 text-lg" asChild>
+          <Button variant="outline" size="lg" className="px-8 py-6 text-lg" asChild>
             <a href={getResumeDownloadUrl()} target="_blank" rel="noopener noreferrer">
               Download Resume
             </a>

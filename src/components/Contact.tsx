@@ -108,8 +108,8 @@ const Contact = () => {
     <section className="py-20 px-6 bg-card/30">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Let's Connect
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-orbitron tracking-widest uppercase bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text">
+            Contact
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Ready to collaborate on data-driven solutions or discuss opportunities
@@ -118,7 +118,7 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <Card className="hover-glow border-border/50">
+          <Card>
             <CardHeader>
               <CardTitle className="text-2xl">Send a Message</CardTitle>
               <CardDescription>
@@ -133,7 +133,6 @@ const Contact = () => {
                     <Input 
                       {...register("firstName")}
                       placeholder="What's your first name?" 
-                      className="border-border/50" 
                     />
                     {errors.firstName && (
                       <p className="text-sm text-red-500">{errors.firstName.message}</p>
@@ -144,7 +143,6 @@ const Contact = () => {
                     <Input 
                       {...register("lastName")}
                       placeholder="What's your last name?" 
-                      className="border-border/50" 
                     />
                     {errors.lastName && (
                       <p className="text-sm text-red-500">{errors.lastName.message}</p>
@@ -158,7 +156,6 @@ const Contact = () => {
                     {...register("email")}
                     type="email" 
                     placeholder="Enter your email" 
-                    className="border-border/50" 
                   />
                   {errors.email && (
                     <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -170,7 +167,6 @@ const Contact = () => {
                   <Input 
                     {...register("subject")}
                     placeholder="Enter the subject line" 
-                    className="border-border/50" 
                   />
                   {errors.subject && (
                     <p className="text-sm text-red-500">{errors.subject.message}</p>
@@ -182,7 +178,7 @@ const Contact = () => {
                   <Textarea 
                     {...register("message")}
                     placeholder="Tell me about your project or opportunity..."
-                    className="border-border/50 min-h-[120px]"
+                    className="min-h-[120px]"
                   />
                   {errors.message && (
                     <p className="text-sm text-red-500">{errors.message.message}</p>
@@ -192,7 +188,7 @@ const Contact = () => {
                 <Button 
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full gradient-primary text-primary-foreground hover-glow"
+                  className="w-full"
                 >
                   {isSubmitting ? (
                     <>
@@ -212,7 +208,7 @@ const Contact = () => {
 
           {/* Contact Information */}
           <div className="space-y-8">
-            <Card className="hover-glow border-border/50">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-2xl">Contact Information</CardTitle>
                 <CardDescription>
@@ -252,7 +248,7 @@ const Contact = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-glow border-border/50">
+            <Card>
               <CardContent className="pt-6">
                 <div className="text-center space-y-6">
                   <h3 className="text-xl font-semibold">Follow My Journey</h3>
@@ -282,7 +278,7 @@ const Contact = () => {
                     </a>
                   </div>
                   
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/10" asChild>
+                  <Button variant="outline" asChild>
                     <a href={getResumeDownloadUrl()} target="_blank" rel="noopener noreferrer">
                       <Download className="w-4 h-4 mr-2" />
                       Download Resume

@@ -13,8 +13,8 @@ const Projects = () => {
     <section className="py-20 px-6 bg-card/30">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Featured Projects
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-orbitron tracking-widest uppercase bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text">
+            Projects
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Real-world applications of data science and machine learning
@@ -25,7 +25,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Link key={project.id} to={`/projects/${project.id}`}>
               <Card 
-                className="hover-glow border-border/50 group cursor-pointer overflow-hidden h-full transition-transform hover:scale-105"
+                className="group cursor-pointer overflow-hidden h-full transition-transform hover:scale-105"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
               <CardHeader className="pb-4">
@@ -71,7 +71,7 @@ const Projects = () => {
                   </Button>
                   <Button 
                     size="sm" 
-                    className="flex-1 gradient-primary text-primary-foreground"
+                    className="flex-1"
                     onClick={(e) => {
                       e.preventDefault();
                       window.open(project.demo, '_blank');
@@ -89,7 +89,7 @@ const Projects = () => {
 
         <div className="text-center mt-12">
           <Link to="/projects">
-            <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10">
+            <Button variant="outline" size="lg">
               View All Projects
             </Button>
           </Link>
