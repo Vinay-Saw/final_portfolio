@@ -21,8 +21,8 @@ const Skills = () => {
     <section className="py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Skills & Expertise
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-orbitron tracking-widest uppercase bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text">
+            Skills
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             A comprehensive toolkit for data science and analytics
@@ -31,7 +31,7 @@ const Skills = () => {
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {/* Technical Skills */}
-          <Card className="hover-glow border-border/50">
+          <Card>
             <CardHeader>
               <CardTitle className="text-2xl flex items-center gap-3">
                 <div className="w-3 h-3 rounded-full gradient-primary"></div>
@@ -61,7 +61,7 @@ const Skills = () => {
           </Card>
 
           {/* Tools & Technologies */}
-          <Card className="hover-glow border-border/50">
+          <Card>
             <CardHeader>
               <CardTitle className="text-2xl flex items-center gap-3">
                 <div className="w-3 h-3 rounded-full gradient-secondary"></div>
@@ -85,7 +85,7 @@ const Skills = () => {
 
         {/* Specializations */}
         <div className="grid md:grid-cols-3 gap-6">
-          <Card className="hover-glow border-border/50 text-center">
+          <Card className="text-center">
             <CardContent className="pt-8 pb-6">
               <div className="w-12 h-12 mx-auto mb-4 gradient-primary rounded-full flex items-center justify-center">
                 <span className="text-xl">🤖</span>
@@ -97,7 +97,7 @@ const Skills = () => {
             </CardContent>
           </Card>
 
-          <Card className="hover-glow border-border/50 text-center">
+          <Card className="text-center">
             <CardContent className="pt-8 pb-6">
               <div className="w-12 h-12 mx-auto mb-4 gradient-secondary rounded-full flex items-center justify-center">
                 <span className="text-xl">📊</span>
@@ -109,7 +109,7 @@ const Skills = () => {
             </CardContent>
           </Card>
 
-          <Card className="hover-glow border-border/50 text-center">
+          <Card className="text-center">
             <CardContent className="pt-8 pb-6">
               <div className="w-12 h-12 mx-auto mb-4 gradient-accent rounded-full flex items-center justify-center">
                 <span className="text-xl">📈</span>
