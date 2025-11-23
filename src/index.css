@@ -8,104 +8,101 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 26% 14%;
-    --foreground: 210 40% 98%;
+    /* Cyberpunk Color Scheme */
+    --background: 240 71% 3%; /* #050511 converted to HSL */
+    --foreground: 180 100% 95%;
 
-    --card: 220 23% 18%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 71% 8%;
+    --card-foreground: 180 100% 95%;
 
-    --popover: 220 23% 18%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 71% 8%;
+    --popover-foreground: 180 100% 95%;
 
-    --primary: 199 89% 48%;
-    --primary-foreground: 220 26% 14%;
+    /* Neon Cyan as primary */
+    --primary: 184 100% 50%; /* #00F0FF */
+    --primary-foreground: 240 71% 3%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 26% 14%;
+    /* Neon Purple as secondary */
+    --secondary: 286 98% 54%; /* #BC13FE */
+    --secondary-foreground: 180 100% 95%;
 
-    --muted: 220 14% 32%;
-    --muted-foreground: 210 20% 65%;
+    --muted: 240 20% 20%;
+    --muted-foreground: 180 20% 70%;
 
-    --accent: 142 76% 36%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 286 98% 54%; /* Neon Purple */
+    --accent-foreground: 180 100% 95%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 180 100% 95%;
 
-    --border: 220 14% 32%;
-    --input: 220 14% 32%;
-    --ring: 199 89% 48%;
+    --border: 240 30% 15%;
+    --input: 240 30% 15%;
+    --ring: 184 100% 50%;
 
-    /* Custom Data Science Theme */
-    --data-blue: 199 89% 48%;
+    /* Custom Data Science Theme with Cyberpunk Colors */
+    --data-blue: 184 100% 50%;
     --data-green: 142 76% 36%;
-    --data-purple: 262 83% 58%;
+    --data-purple: 286 98% 54%;
     --data-orange: 25 95% 53%;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(199 89% 48%), hsl(262 83% 58%));
-    --gradient-secondary: linear-gradient(135deg, hsl(142 76% 36%), hsl(199 89% 48%));
-    --gradient-accent: linear-gradient(135deg, hsl(262 83% 58%), hsl(25 95% 53%));
+    /* Gradients - Updated with neon colors */
+    --gradient-primary: linear-gradient(135deg, hsl(184 100% 50%), hsl(286 98% 54%));
+    --gradient-secondary: linear-gradient(135deg, hsl(286 98% 54%), hsl(184 100% 50%));
+    --gradient-accent: linear-gradient(135deg, hsl(286 98% 54%), hsl(25 95% 53%));
     
-    /* Shadows */
-    --shadow-data: 0 10px 30px -10px hsl(199 89% 48% / 0.3);
-    --shadow-glow: 0 0 40px hsl(199 89% 48% / 0.2);
+    /* Shadows - Updated with neon glow */
+    --shadow-data: 0 10px 30px -10px hsl(184 100% 50% / 0.4);
+    --shadow-glow: 0 0 40px hsl(184 100% 50% / 0.3);
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 240 71% 3%;
+    --sidebar-foreground: 180 100% 95%;
+    --sidebar-primary: 184 100% 50%;
+    --sidebar-primary-foreground: 240 71% 3%;
+    --sidebar-accent: 240 71% 8%;
+    --sidebar-accent-foreground: 180 100% 95%;
+    --sidebar-border: 240 30% 15%;
+    --sidebar-ring: 184 100% 50%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Same as root for dark mode - cyberpunk theme is inherently dark */
+    --background: 240 71% 3%;
+    --foreground: 180 100% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 71% 8%;
+    --card-foreground: 180 100% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 71% 8%;
+    --popover-foreground: 180 100% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 184 100% 50%;
+    --primary-foreground: 240 71% 3%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 286 98% 54%;
+    --secondary-foreground: 180 100% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 20% 20%;
+    --muted-foreground: 180 20% 70%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 286 98% 54%;
+    --accent-foreground: 180 100% 95%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 180 100% 95%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 240 30% 15%;
+    --input: 240 30% 15%;
+    --ring: 184 100% 50%;
+    --sidebar-background: 240 71% 3%;
+    --sidebar-foreground: 180 100% 95%;
+    --sidebar-primary: 184 100% 50%;
+    --sidebar-primary-foreground: 240 71% 3%;
+    --sidebar-accent: 240 71% 8%;
+    --sidebar-accent-foreground: 180 100% 95%;
+    --sidebar-border: 240 30% 15%;
+    --sidebar-ring: 184 100% 50%;
   }
 }
 
@@ -115,7 +112,11 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-rajdhani;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron;
   }
 }
 
@@ -147,5 +148,21 @@ All colors MUST be HSL.
   .hover-glow:hover {
     box-shadow: var(--shadow-glow);
     transform: translateY(-2px);
+  }
+
+  /* Custom Glow Utilities */
+  .glow-text {
+    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.7));
+  }
+
+  .glow-box {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+
+  /* Glass morphism effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
