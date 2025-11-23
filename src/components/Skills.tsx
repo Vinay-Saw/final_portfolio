@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Xarrow, { useXarrow, Xwrapper } from "react-xarrows";
 import {
   SiPython,
@@ -64,6 +64,11 @@ const Skills = () => {
   const isMobile = useIsMobile();
   const updateXarrow = useXarrow();
   const [mounted, setMounted] = useState(false);
+
+  // Generate stable animation delays for floating nodes
+  const animationDelays = useMemo(() => {
+    return [...inputs, ...outputs].map(() => `${Math.random() * 5}s`);
+  }, []);
 
   // Generate connections from data structures
   const connections = inputs.flatMap((input) =>
@@ -164,13 +169,12 @@ const Skills = () => {
               <div className="flex flex-col gap-10 items-center">
                 {inputs.map((input, index) => {
                   const Icon = input.icon;
-                  const randomDelay = `${Math.random() * 5}s`;
                   return (
                     <div key={input.id} className="flex flex-col items-center gap-2">
                       <div
                         id={input.id}
                         className="w-16 h-16 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center z-20 relative transition-all duration-300 hover:shadow-[0_0_20px_#00F0FF] animate-float-complex"
-                        style={{ animationDelay: randomDelay }}
+                        style={{ animationDelay: animationDelays[index] }}
                       >
                         <Icon className="text-neon-cyan text-2xl" />
                       </div>
@@ -206,13 +210,13 @@ const Skills = () => {
               <div className="grid grid-cols-2 gap-6">
                 {outputs.map((output, index) => {
                   const Icon = output.icon;
-                  const randomDelay = `${Math.random() * 5}s`;
+                  const delayIndex = inputs.length + index;
                   return (
                     <div key={output.id} className="flex flex-col items-center gap-2">
                       <div
                         id={output.id}
                         className="w-16 h-16 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center z-20 relative transition-all duration-300 hover:shadow-[0_0_20px_#00F0FF] animate-float-complex"
-                        style={{ animationDelay: randomDelay }}
+                        style={{ animationDelay: animationDelays[delayIndex] }}
                       >
                         {Icon ? (
                           <Icon className="text-neon-cyan text-xl" />
