@@ -44,6 +44,8 @@ const outputs: Array<{ id: string; label: string; icon: IconType | null; connect
   { id: "tableau", label: "Tableau", icon: SiTableau, connectedFrom: ["viz"] },
   { id: "powerbi", label: "PowerBI", icon: null, connectedFrom: ["viz"] },
   { id: "plotly", label: "Plotly", icon: SiPlotly, connectedFrom: ["viz"] },
+  { id: "matplotlib", label: "Matplotlib", icon: null, connectedFrom: ["viz"] },
+  { id: "seaborn", label: "Seaborn", icon: null, connectedFrom: ["viz"] },
 ];
 
 // Skills data for mobile layout
@@ -55,15 +57,14 @@ const technicalSkills = [
   { name: "Git", percentage: 85 },
 ];
 
-const toolsData = [
-  "TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy",
-  "Tableau", "PowerBI", "Plotly", "Matplotlib", "Seaborn",
-];
-
 const Skills = () => {
   const isMobile = useIsMobile();
   const updateXarrow = useXarrow();
   const [mounted, setMounted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Derive tools data from outputs for consistency
+  const toolsData = useMemo(() => outputs.map(output => output.label), []);
 
   // Generate stable animation delays for floating nodes
   const animationDelays = useMemo(() => {
@@ -83,9 +84,22 @@ const Skills = () => {
     setMounted(true);
   }, []);
 
-  // The Sync Loop - continuously update arrows for floating nodes
+  // Intersection observer to detect visibility
   useEffect(() => {
-    if (!isMobile && mounted) {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    
+    const section = document.querySelector('#skills-section');
+    if (section) observer.observe(section);
+    
+    return () => observer.disconnect();
+  }, []);
+
+  // The Sync Loop - continuously update arrows for floating nodes (only when visible)
+  useEffect(() => {
+    if (!isMobile && mounted && isVisible) {
       let animationFrameId: number;
       const updateArrows = () => {
         updateXarrow();
@@ -94,10 +108,10 @@ const Skills = () => {
       animationFrameId = requestAnimationFrame(updateArrows);
       return () => cancelAnimationFrame(animationFrameId);
     }
-  }, [isMobile, mounted, updateXarrow]);
+  }, [isMobile, mounted, isVisible, updateXarrow]);
 
   return (
-    <section className="py-20 px-6">
+    <section id="skills-section" className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 font-orbitron tracking-widest uppercase bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text">
