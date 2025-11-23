@@ -12,7 +12,7 @@ const Skills = () => {
   const createId = (prefix: string, name: string) => {
     const sanitized = name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
     // Ensure we have a valid ID even if sanitization removes all characters
-    return sanitized ? `${prefix}-${sanitized}` : `${prefix}-item-${Math.random().toString(36).substr(2, 9)}`;
+    return sanitized ? `${prefix}-${sanitized}` : `${prefix}-item-${Math.random().toString(36).substring(2, 11)}`;
   };
 
   // Technical skills for Column 1 (Inputs)
@@ -106,7 +106,7 @@ const Skills = () => {
                     {/* Connection node at the end of progress bar */}
                     <div
                       id={createId("node", skill.name)}
-                      className="absolute top-1/2 -right-1.5 w-3 h-3 bg-neon-cyan rounded-full border-2 border-bg-navy transform -translate-y-1/2 shadow-glow"
+                      className="absolute top-1/2 -right-1.5 w-3 h-3 bg-neon-cyan rounded-full border-2 border-[#02020A] transform -translate-y-1/2 shadow-glow"
                     />
                   </div>
                 </div>
