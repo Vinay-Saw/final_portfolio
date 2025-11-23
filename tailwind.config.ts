@@ -121,6 +121,10 @@ export default {
           "50%": {
             boxShadow: "0 0 40px hsl(var(--primary) / 0.6)"
           }
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
         }
       },
       animation: {
@@ -129,6 +133,7 @@ export default {
         "fade-in": "fade-in 0.6s ease-out",
         "slide-up": "slide-up 0.8s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        float: "float 6s ease-in-out infinite",
       },
     },
   },
