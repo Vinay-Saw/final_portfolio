@@ -20,6 +20,7 @@ interface Particle {
 const HeroBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameId = useRef<number>();
+  const timeRef = useRef(0);
   const wavesRef = useRef<Wave[]>([]);
   const particlesRef = useRef<Particle[]>([]);
 
@@ -38,7 +39,7 @@ const HeroBackground = () => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Initialize waves with different speeds and amplitudes
+    // Initialize waves with different speeds and amplitudes (only once)
     if (wavesRef.current.length === 0) {
       wavesRef.current = [
         {
@@ -70,10 +71,8 @@ const HeroBackground = () => {
           color: "#BC13FE", // Neon Purple
         },
       ];
-    }
 
-    // Initialize particles
-    if (particlesRef.current.length === 0) {
+      // Initialize particles (only once)
       const particleCount = 50;
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push({
@@ -86,8 +85,6 @@ const HeroBackground = () => {
         });
       }
     }
-
-    let time = 0;
 
     const animate = () => {
       // Create gradient background
@@ -147,13 +144,14 @@ const HeroBackground = () => {
         ctx.shadowBlur = 15 + index * 5;
         ctx.shadowColor = wave.color;
 
-        // Draw the sine wave
+        // Draw the sine wave (optimized with step size)
         const centerY = canvas.height / 2 + (index - 1.5) * 80;
+        const step = 3; // Step size for performance optimization
 
-        for (let x = 0; x < canvas.width; x++) {
+        for (let x = 0; x < canvas.width; x += step) {
           const y =
             centerY +
-            Math.sin(x * wave.frequency + time * wave.speed + wave.offset) *
+            Math.sin(x * wave.frequency + timeRef.current * wave.speed + wave.offset) *
               wave.amplitude;
 
           if (x === 0) {
@@ -162,12 +160,19 @@ const HeroBackground = () => {
             ctx.lineTo(x, y);
           }
         }
+        
+        // Connect to the end of canvas for smooth edge
+        const finalY = 
+          centerY +
+          Math.sin(canvas.width * wave.frequency + timeRef.current * wave.speed + wave.offset) *
+            wave.amplitude;
+        ctx.lineTo(canvas.width, finalY);
 
         ctx.stroke();
         ctx.restore();
       });
 
-      time++;
+      timeRef.current++;
       animationFrameId.current = requestAnimationFrame(animate);
     };
 
