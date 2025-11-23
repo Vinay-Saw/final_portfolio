@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Xarrow, { Xwrapper } from "react-xarrows";
 import {
   SiPython,
@@ -23,14 +23,6 @@ const Skills = () => {
 
   // Neon cyan color for arrow connections
   const ARROW_COLOR = "#00F0FF";
-
-  // Helper function to create valid HTML IDs from names
-  const createId = (prefix: string, name: string) => {
-    const sanitized = name.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9-]/g, "");
-    return sanitized
-      ? `${prefix}-${sanitized}`
-      : `${prefix}-item-${Math.random().toString(36).substring(2, 11)}`;
-  };
 
   // Input nodes (Left Column) - Programming Languages & Technologies
   const inputs = [
@@ -107,10 +99,11 @@ const Skills = () => {
     { from: "proc-stats", to: "output-numpy" },
   ];
 
-  // Random animation delay generator for floating effect
-  const getRandomDelay = () => {
-    return `${Math.random() * 5}s`;
-  };
+  // Generate stable random animation delays for floating effect (memoized)
+  const animationDelays = useMemo(() => {
+    const totalNodes = inputs.length + outputs.length;
+    return Array.from({ length: totalNodes }, () => `${Math.random() * 5}s`);
+  }, [inputs.length, outputs.length]);
 
   useEffect(() => {
     setMounted(true);
@@ -151,7 +144,7 @@ const Skills = () => {
                     key={input.id}
                     id={input.id}
                     className={`w-16 h-16 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center text-3xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] hover:bg-white/10 cursor-default animate-float ${offsetClass}`}
-                    style={{ animationDelay: getRandomDelay() }}
+                    style={{ animationDelay: animationDelays[index] }}
                   >
                     <Icon className="text-neon-cyan" />
                   </div>
@@ -191,12 +184,13 @@ const Skills = () => {
                 const Icon = output.icon;
                 const offsetClass =
                   index % 2 === 0 ? "md:translate-x-2" : "md:-translate-x-2";
+                const delayIndex = inputs.length + index;
                 return (
                   <div
                     key={output.id}
                     id={output.id}
                     className={`w-14 h-14 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center text-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] hover:bg-white/10 cursor-default animate-float ${offsetClass}`}
-                    style={{ animationDelay: getRandomDelay() }}
+                    style={{ animationDelay: animationDelays[delayIndex] }}
                     title={output.name}
                   >
                     {Icon ? (
