@@ -2,11 +2,17 @@ import { useRef, useEffect, useState } from "react";
 import Xarrow, { Xwrapper } from "react-xarrows";
 
 const Skills = () => {
+  // Prevents hydration mismatches with react-xarrows which relies on client-side DOM measurements
   const [mounted, setMounted] = useState(false);
+
+  // Neon cyan color for arrow connections
+  const ARROW_COLOR = "#00F0FF";
 
   // Helper function to create valid HTML IDs from names
   const createId = (prefix: string, name: string) => {
-    return `${prefix}-${name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '')}`;
+    const sanitized = name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+    // Ensure we have a valid ID even if sanitization removes all characters
+    return sanitized ? `${prefix}-${sanitized}` : `${prefix}-item-${Math.random().toString(36).substr(2, 9)}`;
   };
 
   // Technical skills for Column 1 (Inputs)
@@ -154,7 +160,7 @@ const Skills = () => {
                 key={`${conn.from}-${conn.to}-${idx}`}
                 start={conn.from}
                 end={conn.to}
-                color="#00F0FF"
+                color={ARROW_COLOR}
                 strokeWidth={2}
                 path="smooth"
                 dashness={{ animation: 1 }}
