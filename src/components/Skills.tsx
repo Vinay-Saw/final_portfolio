@@ -4,6 +4,11 @@ import Xarrow, { Xwrapper } from "react-xarrows";
 const Skills = () => {
   const [mounted, setMounted] = useState(false);
 
+  // Helper function to create valid HTML IDs from names
+  const createId = (prefix: string, name: string) => {
+    return `${prefix}-${name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '')}`;
+  };
+
   // Technical skills for Column 1 (Inputs)
   const technicalSkills = [
     { name: "Python", level: 90 },
@@ -38,23 +43,23 @@ const Skills = () => {
 
   // Connection mappings (which skills connect to which processors)
   const connections = [
-    { from: "node-Python", to: "ml" },
-    { from: "node-Python", to: "viz" },
-    { from: "node-R", to: "stats" },
-    { from: "node-R", to: "viz" },
-    { from: "node-SQL", to: "viz" },
-    { from: "node-JavaScript", to: "viz" },
-    { from: "node-Julia", to: "stats" },
-    { from: "ml", to: "tool-TensorFlow" },
-    { from: "ml", to: "tool-PyTorch" },
-    { from: "ml", to: "tool-Scikit-learn" },
-    { from: "viz", to: "tool-Tableau" },
-    { from: "viz", to: "tool-PowerBI" },
-    { from: "viz", to: "tool-Matplotlib" },
-    { from: "viz", to: "tool-Seaborn" },
-    { from: "viz", to: "tool-Plotly" },
-    { from: "stats", to: "tool-Pandas" },
-    { from: "stats", to: "tool-NumPy" },
+    { from: createId("node", "Python"), to: "ml" },
+    { from: createId("node", "Python"), to: "viz" },
+    { from: createId("node", "R"), to: "stats" },
+    { from: createId("node", "R"), to: "viz" },
+    { from: createId("node", "SQL"), to: "viz" },
+    { from: createId("node", "JavaScript"), to: "viz" },
+    { from: createId("node", "Julia"), to: "stats" },
+    { from: "ml", to: createId("tool", "TensorFlow") },
+    { from: "ml", to: createId("tool", "PyTorch") },
+    { from: "ml", to: createId("tool", "Scikit-learn") },
+    { from: "viz", to: createId("tool", "Tableau") },
+    { from: "viz", to: createId("tool", "PowerBI") },
+    { from: "viz", to: createId("tool", "Matplotlib") },
+    { from: "viz", to: createId("tool", "Seaborn") },
+    { from: "viz", to: createId("tool", "Plotly") },
+    { from: "stats", to: createId("tool", "Pandas") },
+    { from: "stats", to: createId("tool", "NumPy") },
   ];
 
   useEffect(() => {
@@ -94,7 +99,7 @@ const Skills = () => {
                     />
                     {/* Connection node at the end of progress bar */}
                     <div
-                      id={`node-${skill.name}`}
+                      id={createId("node", skill.name)}
                       className="absolute top-1/2 -right-1.5 w-3 h-3 bg-neon-cyan rounded-full border-2 border-bg-navy transform -translate-y-1/2 shadow-glow"
                     />
                   </div>
@@ -132,7 +137,7 @@ const Skills = () => {
                 {tools.map((tool) => (
                   <div
                     key={tool}
-                    id={`tool-${tool}`}
+                    id={createId("tool", tool)}
                     className="premium-glass rounded-lg px-3 py-2 text-center text-sm font-medium hover:bg-white/10 transition-all duration-300 hover:border-neon-cyan cursor-default"
                   >
                     {tool}
