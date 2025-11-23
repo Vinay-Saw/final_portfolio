@@ -84,20 +84,25 @@ const Skills = () => {
     setMounted(true);
   }, []);
 
-  // Intersection observer to detect visibility
+  // Intersection observer to detect visibility and pause animations when not in view
   useEffect(() => {
+    const section = document.querySelector('#skills-section');
+    if (!section) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
       { threshold: 0.1 }
     );
     
-    const section = document.querySelector('#skills-section');
-    if (section) observer.observe(section);
-    
+    observer.observe(section);
     return () => observer.disconnect();
-  }, []);
+  }, [mounted]);
 
   // The Sync Loop - continuously update arrows for floating nodes (only when visible)
+  // requestAnimationFrame is optimal for smooth animations as it:
+  // 1. Syncs with browser refresh rate (typically 60fps)
+  // 2. Automatically pauses when tab is not visible
+  // 3. Is necessary here because nodes are continuously moving with CSS animations
   useEffect(() => {
     if (!isMobile && mounted && isVisible) {
       let animationFrameId: number;
