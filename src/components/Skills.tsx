@@ -1,75 +1,129 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Xarrow, { Xwrapper } from "react-xarrows";
+import {
+  SiPython,
+  SiR,
+  SiMysql,
+  SiJavascript,
+  SiJulia,
+  SiTensorflow,
+  SiPytorch,
+  SiScikitlearn,
+  SiPandas,
+  SiNumpy,
+  SiTableau,
+  SiPlotly,
+} from "react-icons/si";
+import { Brain, BarChart3, TrendingUp } from "lucide-react";
 
 const Skills = () => {
   // Prevents hydration mismatches with react-xarrows which relies on client-side DOM measurements
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Neon cyan color for arrow connections
   const ARROW_COLOR = "#00F0FF";
 
   // Helper function to create valid HTML IDs from names
   const createId = (prefix: string, name: string) => {
-    const sanitized = name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '');
-    // Ensure we have a valid ID even if sanitization removes all characters
-    return sanitized ? `${prefix}-${sanitized}` : `${prefix}-item-${Math.random().toString(36).substring(2, 11)}`;
+    const sanitized = name.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9-]/g, "");
+    return sanitized
+      ? `${prefix}-${sanitized}`
+      : `${prefix}-item-${Math.random().toString(36).substring(2, 11)}`;
   };
 
-  // Technical skills for Column 1 (Inputs)
-  const technicalSkills = [
-    { name: "Python", level: 90 },
-    { name: "R", level: 85 },
-    { name: "SQL", level: 88 },
-    { name: "JavaScript", level: 82 },
-    { name: "Julia", level: 75 },
+  // Input nodes (Left Column) - Programming Languages & Technologies
+  const inputs = [
+    { name: "Python", icon: SiPython, id: "input-python" },
+    { name: "R", icon: SiR, id: "input-r" },
+    { name: "SQL", icon: SiMysql, id: "input-sql" },
+    { name: "JavaScript", icon: SiJavascript, id: "input-javascript" },
+    { name: "Julia", icon: SiJulia, id: "input-julia" },
   ];
 
-  // Processors for Column 2
+  // Processor nodes (Center Column) - Core Competencies
   const processors = [
-    { id: "ml", name: "Machine Learning", icon: "🤖" },
-    { id: "viz", name: "Data Visualization", icon: "📊" },
-    { id: "stats", name: "Statistical Analysis", icon: "📈" },
+    {
+      id: "proc-ml",
+      name: "Machine Learning",
+      icon: Brain,
+      description: "AI & Deep Learning",
+    },
+    {
+      id: "proc-viz",
+      name: "Data Visualization",
+      icon: BarChart3,
+      description: "Visual Analytics",
+    },
+    {
+      id: "proc-stats",
+      name: "Statistical Analysis",
+      icon: TrendingUp,
+      description: "Data Insights",
+    },
   ];
 
-  // Tools for Column 3 (Outputs)
-  const tools = [
-    "TensorFlow",
-    "PyTorch",
-    "Scikit-learn",
-    "Pandas",
-    "NumPy",
-    "Tableau",
-    "PowerBI",
-    "Matplotlib",
-    "Seaborn",
-    "Plotly",
-    "Jupyter",
-    "Git",
+  // Output nodes (Right Column) - Tools & Frameworks
+  const outputs = [
+    { name: "TensorFlow", icon: SiTensorflow, id: "output-tensorflow" },
+    { name: "PyTorch", icon: SiPytorch, id: "output-pytorch" },
+    { name: "Scikit-learn", icon: SiScikitlearn, id: "output-scikitlearn" },
+    { name: "Pandas", icon: SiPandas, id: "output-pandas" },
+    { name: "NumPy", icon: SiNumpy, id: "output-numpy" },
+    { name: "Tableau", icon: SiTableau, id: "output-tableau" },
+    { name: "PowerBI", icon: null, id: "output-powerbi" },
+    { name: "Matplotlib", icon: null, id: "output-matplotlib" },
+    { name: "Seaborn", icon: null, id: "output-seaborn" },
+    { name: "Plotly", icon: SiPlotly, id: "output-plotly" },
   ];
 
-  // Connection mappings (which skills connect to which processors)
+  // Connection mappings - Many-to-Many relationships
   const connections = [
-    { from: createId("node", "Python"), to: "ml" },
-    { from: createId("node", "Python"), to: "viz" },
-    { from: createId("node", "R"), to: "stats" },
-    { from: createId("node", "R"), to: "viz" },
-    { from: createId("node", "SQL"), to: "viz" },
-    { from: createId("node", "JavaScript"), to: "viz" },
-    { from: createId("node", "Julia"), to: "stats" },
-    { from: "ml", to: createId("tool", "TensorFlow") },
-    { from: "ml", to: createId("tool", "PyTorch") },
-    { from: "ml", to: createId("tool", "Scikit-learn") },
-    { from: "viz", to: createId("tool", "Tableau") },
-    { from: "viz", to: createId("tool", "PowerBI") },
-    { from: "viz", to: createId("tool", "Matplotlib") },
-    { from: "viz", to: createId("tool", "Seaborn") },
-    { from: "viz", to: createId("tool", "Plotly") },
-    { from: "stats", to: createId("tool", "Pandas") },
-    { from: "stats", to: createId("tool", "NumPy") },
+    // Python connects to all processors
+    { from: "input-python", to: "proc-ml" },
+    { from: "input-python", to: "proc-viz" },
+    { from: "input-python", to: "proc-stats" },
+    // R connects to stats and viz
+    { from: "input-r", to: "proc-stats" },
+    { from: "input-r", to: "proc-viz" },
+    // SQL connects to viz
+    { from: "input-sql", to: "proc-viz" },
+    // JavaScript connects to viz
+    { from: "input-javascript", to: "proc-viz" },
+    // Julia connects to stats
+    { from: "input-julia", to: "proc-stats" },
+    // ML connects to ML frameworks
+    { from: "proc-ml", to: "output-tensorflow" },
+    { from: "proc-ml", to: "output-pytorch" },
+    { from: "proc-ml", to: "output-scikitlearn" },
+    // Viz connects to viz tools
+    { from: "proc-viz", to: "output-tableau" },
+    { from: "proc-viz", to: "output-powerbi" },
+    { from: "proc-viz", to: "output-matplotlib" },
+    { from: "proc-viz", to: "output-seaborn" },
+    { from: "proc-viz", to: "output-plotly" },
+    // Stats connects to data tools
+    { from: "proc-stats", to: "output-pandas" },
+    { from: "proc-stats", to: "output-numpy" },
   ];
+
+  // Random animation delay generator for floating effect
+  const getRandomDelay = () => {
+    return `${Math.random() * 5}s`;
+  };
 
   useEffect(() => {
     setMounted(true);
+    
+    // Check if mobile on mount and window resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return (
@@ -85,76 +139,82 @@ const Skills = () => {
         </div>
 
         <Xwrapper>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
-            {/* Column 1: Technical Skills (Inputs) */}
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold mb-8 text-center md:text-left flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-neon-cyan"></div>
-                INPUTS
-              </h3>
-              {technicalSkills.map((skill) => (
-                <div key={skill.name} className="space-y-2">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-medium">{skill.name}</span>
-                    <span className="text-muted-foreground">{skill.level}%</span>
-                  </div>
-                  <div className="relative h-3 bg-white/5 rounded-full overflow-hidden border border-white/10">
-                    <div
-                      className="absolute top-0 left-0 h-full bg-gradient-to-r from-neon-cyan to-neon-purple transition-all duration-1000"
-                      style={{ width: `${skill.level}%` }}
-                    />
-                    {/* Connection node at the end of progress bar */}
-                    <div
-                      id={createId("node", skill.name)}
-                      className="absolute top-1/2 -right-1.5 w-3 h-3 bg-neon-cyan rounded-full border-2 border-[#02020A] transform -translate-y-1/2 shadow-glow"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 2: Processors (Central Processing) */}
-            <div className="flex flex-col justify-center gap-6">
-              <h3 className="text-2xl font-bold mb-2 text-center flex items-center justify-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-neon-purple"></div>
-                PROCESSORS
-              </h3>
-              {processors.map((processor) => (
-                <div
-                  key={processor.id}
-                  id={processor.id}
-                  className="premium-glass rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 hover:shadow-glow cursor-default"
-                >
-                  <div className="text-4xl mb-3">{processor.icon}</div>
-                  <h4 className="text-lg font-bold text-neon-cyan">
-                    {processor.name}
-                  </h4>
-                </div>
-              ))}
-            </div>
-
-            {/* Column 3: Tools (Outputs) */}
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold mb-8 text-center md:text-right flex items-center justify-end gap-3">
-                <div className="w-2 h-2 rounded-full bg-neon-purple"></div>
-                OUTPUTS
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {tools.map((tool) => (
+          <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 py-20">
+            {/* Left Column: Inputs - Programming Languages */}
+            <div className="flex flex-col gap-8">
+              {inputs.map((input, index) => {
+                const Icon = input.icon;
+                const offsetClass =
+                  index % 2 === 0 ? "md:translate-x-4" : "md:-translate-x-4";
+                return (
                   <div
-                    key={tool}
-                    id={createId("tool", tool)}
-                    className="premium-glass rounded-lg px-3 py-2 text-center text-sm font-medium hover:bg-white/10 transition-all duration-300 hover:border-neon-cyan cursor-default"
+                    key={input.id}
+                    id={input.id}
+                    className={`w-16 h-16 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center text-3xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] hover:bg-white/10 cursor-default animate-float ${offsetClass}`}
+                    style={{ animationDelay: getRandomDelay() }}
                   >
-                    {tool}
+                    <Icon className="text-neon-cyan" />
                   </div>
-                ))}
-              </div>
+                );
+              })}
+            </div>
+
+            {/* Center Column: Processors - Core Competencies */}
+            <div className="flex flex-col gap-6">
+              {processors.map((processor) => {
+                const Icon = processor.icon;
+                return (
+                  <div
+                    key={processor.id}
+                    id={processor.id}
+                    className="w-64 h-24 bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg p-4 flex items-center gap-4 transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] hover:bg-white/10 cursor-default"
+                  >
+                    <div className="flex-shrink-0">
+                      <Icon className="w-10 h-10 text-neon-cyan" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-white">
+                        {processor.name}
+                      </h4>
+                      <p className="text-xs text-muted-foreground">
+                        {processor.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Right Column: Outputs - Tools & Frameworks */}
+            <div className="grid grid-cols-2 gap-4">
+              {outputs.map((output, index) => {
+                const Icon = output.icon;
+                const offsetClass =
+                  index % 2 === 0 ? "md:translate-x-2" : "md:-translate-x-2";
+                return (
+                  <div
+                    key={output.id}
+                    id={output.id}
+                    className={`w-14 h-14 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center text-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] hover:bg-white/10 cursor-default animate-float ${offsetClass}`}
+                    style={{ animationDelay: getRandomDelay() }}
+                    title={output.name}
+                  >
+                    {Icon ? (
+                      <Icon className="text-neon-cyan" />
+                    ) : (
+                      <span className="text-xs text-neon-cyan font-bold">
+                        {output.name.substring(0, 2).toUpperCase()}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Xarrows: Draw the connections */}
+          {/* Xarrows: Draw the connections - Hidden on mobile */}
           {mounted &&
+            !isMobile &&
             connections.map((conn, idx) => (
               <Xarrow
                 key={`${conn.from}-${conn.to}-${idx}`}
@@ -162,11 +222,8 @@ const Skills = () => {
                 end={conn.to}
                 color={ARROW_COLOR}
                 strokeWidth={2}
-                path="smooth"
-                dashness={{ animation: 1 }}
-                headSize={4}
-                showHead={true}
-                animateDrawing={0.5}
+                curveness={0.5}
+                showHead={false}
               />
             ))}
         </Xwrapper>
