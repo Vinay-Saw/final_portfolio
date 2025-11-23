@@ -1,126 +1,164 @@
-import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRef, useEffect, useState } from "react";
+import Xarrow, { Xwrapper } from "react-xarrows";
 
 const Skills = () => {
+  const [mounted, setMounted] = useState(false);
+
+  // Technical skills for Column 1 (Inputs)
   const technicalSkills = [
-    { name: "Python", level: 90, color: "data-blue" },
-    { name: "R", level: 85, color: "data-green" },
-    { name: "SQL", level: 88, color: "data-purple" },
-    { name: "Machine Learning", level: 82, color: "data-orange" },
-    { name: "Data Visualization", level: 87, color: "data-blue" },
-    { name: "Statistical Analysis", level: 85, color: "data-green" },
+    { name: "Python", level: 90 },
+    { name: "R", level: 85 },
+    { name: "SQL", level: 88 },
+    { name: "JavaScript", level: 82 },
+    { name: "Julia", level: 75 },
   ];
 
-  const tools = [
-    "TensorFlow", "Scikit-learn", "Pandas", "NumPy",
-    "Matplotlib", "Seaborn", "Plotly", "Jupyter",
-    "Git", "Docker", "AWS", "Tableau"
+  // Processors for Column 2
+  const processors = [
+    { id: "ml", name: "Machine Learning", icon: "🤖" },
+    { id: "viz", name: "Data Visualization", icon: "📊" },
+    { id: "stats", name: "Statistical Analysis", icon: "📈" },
   ];
+
+  // Tools for Column 3 (Outputs)
+  const tools = [
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
+    "Pandas",
+    "NumPy",
+    "Tableau",
+    "PowerBI",
+    "Matplotlib",
+    "Seaborn",
+    "Plotly",
+    "Jupyter",
+    "Git",
+  ];
+
+  // Connection mappings (which skills connect to which processors)
+  const connections = [
+    { from: "node-Python", to: "ml" },
+    { from: "node-Python", to: "viz" },
+    { from: "node-R", to: "stats" },
+    { from: "node-R", to: "viz" },
+    { from: "node-SQL", to: "viz" },
+    { from: "node-JavaScript", to: "viz" },
+    { from: "node-Julia", to: "stats" },
+    { from: "ml", to: "tool-TensorFlow" },
+    { from: "ml", to: "tool-PyTorch" },
+    { from: "ml", to: "tool-Scikit-learn" },
+    { from: "viz", to: "tool-Tableau" },
+    { from: "viz", to: "tool-PowerBI" },
+    { from: "viz", to: "tool-Matplotlib" },
+    { from: "viz", to: "tool-Seaborn" },
+    { from: "viz", to: "tool-Plotly" },
+    { from: "stats", to: "tool-Pandas" },
+    { from: "stats", to: "tool-NumPy" },
+  ];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <section className="py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 font-orbitron tracking-widest uppercase bg-gradient-to-r from-cyan-400 to-purple-600 text-transparent bg-clip-text">
-            Skills
+            Neural Skills Network
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive toolkit for data science and analytics
+            Connected knowledge pathways for data science mastery
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {/* Technical Skills */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full gradient-primary"></div>
-                Technical Skills
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
+        <Xwrapper>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 relative">
+            {/* Column 1: Technical Skills (Inputs) */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold mb-8 text-center md:text-left flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-neon-cyan"></div>
+                INPUTS
+              </h3>
               {technicalSkills.map((skill) => (
                 <div key={skill.name} className="space-y-2">
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center text-sm">
                     <span className="font-medium">{skill.name}</span>
-                    <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                    <span className="text-muted-foreground">{skill.level}%</span>
                   </div>
-                  <div className="relative">
-                    <Progress 
-                      value={skill.level} 
-                      className="h-3 bg-muted"
-                    />
-                    <div 
-                      className="absolute top-0 left-0 h-3 gradient-primary transition-all duration-1000 ease-out"
+                  <div className="relative h-3 bg-white/5 rounded-full overflow-hidden border border-white/10">
+                    <div
+                      className="absolute top-0 left-0 h-full bg-gradient-to-r from-neon-cyan to-neon-purple transition-all duration-1000"
                       style={{ width: `${skill.level}%` }}
+                    />
+                    {/* Connection node at the end of progress bar */}
+                    <div
+                      id={`node-${skill.name}`}
+                      className="absolute top-1/2 -right-1.5 w-3 h-3 bg-neon-cyan rounded-full border-2 border-bg-navy transform -translate-y-1/2 shadow-glow"
                     />
                   </div>
                 </div>
               ))}
-            </CardContent>
-          </Card>
+            </div>
 
-          {/* Tools & Technologies */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full gradient-secondary"></div>
-                Tools & Technologies
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
+            {/* Column 2: Processors (Central Processing) */}
+            <div className="flex flex-col justify-center gap-6">
+              <h3 className="text-2xl font-bold mb-2 text-center flex items-center justify-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-neon-purple"></div>
+                PROCESSORS
+              </h3>
+              {processors.map((processor) => (
+                <div
+                  key={processor.id}
+                  id={processor.id}
+                  className="premium-glass rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 hover:shadow-glow cursor-default"
+                >
+                  <div className="text-4xl mb-3">{processor.icon}</div>
+                  <h4 className="text-lg font-bold text-neon-cyan">
+                    {processor.name}
+                  </h4>
+                </div>
+              ))}
+            </div>
+
+            {/* Column 3: Tools (Outputs) */}
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold mb-8 text-center md:text-right flex items-center justify-end gap-3">
+                <div className="w-2 h-2 rounded-full bg-neon-purple"></div>
+                OUTPUTS
+              </h3>
               <div className="grid grid-cols-2 gap-3">
                 {tools.map((tool) => (
-                  <div 
+                  <div
                     key={tool}
-                    className="px-4 py-3 bg-muted/50 rounded-lg text-center hover:bg-muted/70 transition-colors cursor-default border border-border/30"
+                    id={`tool-${tool}`}
+                    className="premium-glass rounded-lg px-3 py-2 text-center text-sm font-medium hover:bg-white/10 transition-all duration-300 hover:border-neon-cyan cursor-default"
                   >
                     {tool}
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+          </div>
 
-        {/* Specializations */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <Card className="text-center">
-            <CardContent className="pt-8 pb-6">
-              <div className="w-12 h-12 mx-auto mb-4 gradient-primary rounded-full flex items-center justify-center">
-                <span className="text-xl">🤖</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Machine Learning</h3>
-              <p className="text-muted-foreground">
-                Supervised & unsupervised learning, deep learning, and model optimization
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center">
-            <CardContent className="pt-8 pb-6">
-              <div className="w-12 h-12 mx-auto mb-4 gradient-secondary rounded-full flex items-center justify-center">
-                <span className="text-xl">📊</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Data Visualization</h3>
-              <p className="text-muted-foreground">
-                Interactive dashboards, statistical charts, and compelling data stories
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center">
-            <CardContent className="pt-8 pb-6">
-              <div className="w-12 h-12 mx-auto mb-4 gradient-accent rounded-full flex items-center justify-center">
-                <span className="text-xl">📈</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Statistical Analysis</h3>
-              <p className="text-muted-foreground">
-                Hypothesis testing, regression analysis, and predictive modeling
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+          {/* Xarrows: Draw the connections */}
+          {mounted &&
+            connections.map((conn, idx) => (
+              <Xarrow
+                key={`${conn.from}-${conn.to}-${idx}`}
+                start={conn.from}
+                end={conn.to}
+                color="#00F0FF"
+                strokeWidth={2}
+                path="smooth"
+                dashness={{ animation: 1 }}
+                headSize={4}
+                showHead={true}
+                animateDrawing={0.5}
+              />
+            ))}
+        </Xwrapper>
       </div>
     </section>
   );

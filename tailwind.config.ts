@@ -18,7 +18,7 @@ export default {
         rajdhani: ['Rajdhani', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
       },
       colors: {
-        'bg-navy': '#050511',
+        'bg-navy': '#02020A',
         'neon-cyan': '#00F0FF',
         'neon-purple': '#BC13FE',
         'glass': 'rgba(255, 255, 255, 0.05)',

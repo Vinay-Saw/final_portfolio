@@ -9,7 +9,7 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Cyberpunk Color Scheme */
-    --background: 240 71% 3%; /* #050511 converted to HSL */
+    --background: 240 63% 2%; /* #02020A (Deep Space Navy) converted to HSL */
     --foreground: 180 100% 95%;
 
     --card: 240 71% 8%;
@@ -56,10 +56,10 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    --sidebar-background: 240 71% 3%;
+    --sidebar-background: 240 63% 2%;
     --sidebar-foreground: 180 100% 95%;
     --sidebar-primary: 184 100% 50%;
-    --sidebar-primary-foreground: 240 71% 3%;
+    --sidebar-primary-foreground: 240 63% 2%;
     --sidebar-accent: 240 71% 8%;
     --sidebar-accent-foreground: 180 100% 95%;
     --sidebar-border: 240 30% 15%;
@@ -68,7 +68,7 @@ All colors MUST be HSL.
 
   .dark {
     /* Same as root for dark mode - cyberpunk theme is inherently dark */
-    --background: 240 71% 3%;
+    --background: 240 63% 2%;
     --foreground: 180 100% 95%;
 
     --card: 240 71% 8%;
@@ -78,7 +78,7 @@ All colors MUST be HSL.
     --popover-foreground: 180 100% 95%;
 
     --primary: 184 100% 50%;
-    --primary-foreground: 240 71% 3%;
+    --primary-foreground: 240 63% 2%;
 
     --secondary: 286 98% 54%;
     --secondary-foreground: 180 100% 95%;
@@ -95,10 +95,10 @@ All colors MUST be HSL.
     --border: 240 30% 15%;
     --input: 240 30% 15%;
     --ring: 184 100% 50%;
-    --sidebar-background: 240 71% 3%;
+    --sidebar-background: 240 63% 2%;
     --sidebar-foreground: 180 100% 95%;
     --sidebar-primary: 184 100% 50%;
-    --sidebar-primary-foreground: 240 71% 3%;
+    --sidebar-primary-foreground: 240 63% 2%;
     --sidebar-accent: 240 71% 8%;
     --sidebar-accent-foreground: 180 100% 95%;
     --sidebar-border: 240 30% 15%;
@@ -116,7 +116,7 @@ All colors MUST be HSL.
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-orbitron;
+    @apply font-orbitron tracking-widest;
   }
 }
 
@@ -164,5 +164,11 @@ All colors MUST be HSL.
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Premium Glass Utility */
+  .premium-glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
 }
