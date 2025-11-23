@@ -100,6 +100,7 @@ const Skills = () => {
   ];
 
   // Generate stable random animation delays for floating effect (memoized)
+  // Note: Only inputs and outputs have floating animations, processors are static
   const animationDelays = useMemo(() => {
     const totalNodes = inputs.length + outputs.length;
     return Array.from({ length: totalNodes }, () => `${Math.random() * 5}s`);
