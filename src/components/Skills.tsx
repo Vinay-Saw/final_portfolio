@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useXarrow, Xwrapper, Xarrow } from "react-xarrows";
+import Xarrow, { useXarrow, Xwrapper } from "react-xarrows";
 import {
   SiPython,
   SiR,
@@ -14,13 +14,14 @@ import {
   SiPlotly,
   SiGit,
 } from "react-icons/si";
-import { Brain, BarChart, LineChart } from "lucide-react";
+import { Brain, BarChart, LineChart, type LucideIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
+import type { IconType } from "react-icons";
 
 // Data structures for Desktop Network
-const inputs = [
+const inputs: Array<{ id: string; label: string; icon: IconType; connectsTo: string[] }> = [
   { id: "python", label: "Python", icon: SiPython, connectsTo: ["ml", "viz", "stats"] },
   { id: "r", label: "R", icon: SiR, connectsTo: ["stats", "viz"] },
   { id: "mysql", label: "SQL", icon: SiMysql, connectsTo: ["viz"] },
@@ -28,13 +29,13 @@ const inputs = [
   { id: "git", label: "Git", icon: SiGit, connectsTo: ["ml"] },
 ];
 
-const processors = [
+const processors: Array<{ id: string; label: string; icon: LucideIcon; description: string }> = [
   { id: "ml", label: "Machine Learning", icon: Brain, description: "AI & Deep Learning" },
   { id: "viz", label: "Data Visualization", icon: BarChart, description: "Visual Analytics" },
   { id: "stats", label: "Statistical Analysis", icon: LineChart, description: "Data Insights" },
 ];
 
-const outputs = [
+const outputs: Array<{ id: string; label: string; icon: IconType | null; connectedFrom: string[] }> = [
   { id: "tf", label: "TensorFlow", icon: SiTensorflow, connectedFrom: ["ml"] },
   { id: "pytorch", label: "PyTorch", icon: SiPytorch, connectedFrom: ["ml"] },
   { id: "sklearn", label: "Scikit-learn", icon: SiScikitlearn, connectedFrom: ["ml"] },
